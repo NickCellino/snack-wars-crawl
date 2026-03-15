@@ -1,27 +1,88 @@
-<p align="center">
-  <a target="_blank" href="https://StarWarsIntroCreator.KasselLabs.io">
-    <img src="./intro.gif"/>
-  </a>
-</p>
+# Snack Wars Opening Crawl
 
-# Star Wars Intro Creator
+A Star Wars-style opening crawl for "The Snack Wars" with a simple "Click to Play" interface.
 
-Create your own Star Wars movie opening.  
-Fill the inputs with any text and hit Play.  
-You can share the URL generated and anyone can see your intro.  
-Access: [https://StarWarsIntroCreator.KasselLabs.io](https://StarWarsIntroCreator.KasselLabs.io)
+## Features
+
+- Black screen with starfield background
+- Centered "Click to Play" button
+- Full Star Wars opening crawl animation with:
+  - "A long time ago..." intro
+  - Star Wars logo animation
+  - Scrolling crawl text
+  - Death Star appearance
+  - Theme music
+- YouTube link to "The Snack Wars, Part 1!" appears during playback
+- Press ESC or Space to restart
+
+## Local Testing
+
+Since this is a static HTML file, you can test it locally using any of these methods:
+
+### Option 1: Direct File Open
+Simply open `index.html` in your web browser by double-clicking the file.
+
+### Option 2: Python HTTP Server
+```bash
+cd crawl
+python3 -m http.server 8000
+# Then open http://localhost:8000 in your browser
+```
+
+### Option 3: Node.js HTTP Server
+```bash
+cd crawl
+npx http-server -p 8000
+# Then open http://localhost:8000 in your browser
+```
+
+### Option 4: VS Code Live Server
+Install the "Live Server" extension in VS Code, right-click on `index.html`, and select "Open with Live Server".
+
+**Note:** Modern browsers require user interaction to autoplay audio, so make sure to click the "Click to Play" button to hear the theme music.
+
+## Deployment
+
+This project is automatically deployed to GitHub Pages using GitHub Actions. Just push to the `main` or `master` branch and it will deploy automatically.
+
+### Setup Instructions
+
+1. Push this code to a GitHub repository
+2. Go to Settings → Pages in your GitHub repository
+3. Under "Build and deployment", select:
+   - Source: GitHub Actions
+4. The workflow will run automatically on your next push, or you can trigger it manually from the Actions tab
+
+### Manual Deployment
+
+If you prefer to deploy manually, simply copy the `crawl/index.html` file to any static web hosting service (GitHub Pages, Netlify, Vercel, etc.).
+
+## Customization
+
+### Change the Crawl Text
+Edit the content inside the `#text` div in `crawl/index.html`.
+
+### Change the Logo Text
+Modify the `.logoText` div in `crawl/index.html`.
+
+### Change Animation Speed
+To make the crawl faster or slower, edit the CSS custom property at the top of `index.html`:
+
+```css
+:root {
+    --time-factor: 0.7;  /* Change this value */
+}
+```
+
+- `1.0` = normal speed
+- `0.7` = 30% faster (current setting)
+- `0.5` = 2x faster
+- `2.0` = 2x slower
+
+All animation timings (intro, logo, crawl, ending) will scale automatically based on this value.
 
 ## Credits
-Build on top of the [work by Tim Pietrusky](http://timpietrusky.com/star-wars-opening-crawl-from-1977)  
-By [Bruno Orlandi](https://github.com/BrOrlandi) and [Nihey Takizawa](https://github.com/nihey)
 
-## Supported by
-<a href="https://browserstack.com">
-<img src="https://p14.zdusercontent.com/attachment/1015988/CPxorOYzMerYQpnRvjBUYemP5?token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..nFU5zix_BNUintQQaqubKg.SCFMi5NpyEJCUKgxdYVny0ghysizkJtzSsRcIU6tMptzD-PbtKYviHGkpJOCrPOYfIt63SSlvKdmxSdwRl0tbqOSMQfyxGMhDp_3QEfhWEk7b4mja9gok-JxHjBQEQ9ikSU2Hf15wHkfvTMBoQTKWuae35oFQdtnbFyIKSQw_dXnsw-lE_mB7Y1hc5W3MrupVOz5npQAhsB7tvlRpnMOrmO6Fr21rRcKn7ZcNZfa7wHjmafc5M3inotDCghNoGaHZt8cm2kVhudqbufNh1FXAE3l2iq9nPtdQ8hO4WTAp4I.i_D3IXQOPAz6wuzsDDE5HQ" width="400" />
-</a>
+Based on the Star Wars Intro Creator by Kassel Labs (https://github.com/KasselLabs/StarWarsIntroCreator)
 
-
-## Screenshots
-![Intro 1](ss1.png)
-
-![Intro 2](ss2.png)
+Theme music and assets used under fair use for educational/parody purposes.
