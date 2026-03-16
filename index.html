@@ -22,6 +22,9 @@
          */
         :root {
             --time-factor: 1.5;
+
+            /* use this for testing */
+            /* --time-factor: 0.2; */
             
             /* Logo timings - always original speed */
             --logo-duration: 11s;
@@ -39,9 +42,8 @@
             --ending-duration: calc(7s * var(--time-factor));
             --ending-delay: calc(86s * var(--time-factor));
             
-            /* YouTube link visibility */
-            --youtube-duration: calc(65s * var(--time-factor));
-            --youtube-delay: 3s;
+            /* End screen fade-in - starts 5s before crawl ends */
+            --end-screen-delay: calc(var(--crawl-delay) + var(--crawl-duration) - (28.5s * var(--time-factor)));
         }
 
         @font-face {
@@ -295,7 +297,7 @@
             animation: scrolldown var(--ending-duration) var(--ending-delay) forwards;
         }
 
-        /* YouTube Link */
+        /* YouTube Link - Static, always visible in lower right */
         #youtubeLink {
             position: fixed;
             bottom: 20px;
@@ -307,7 +309,6 @@
 
         body.playing #youtubeLink {
             opacity: 1;
-            animation: fadeInOut var(--youtube-duration) linear var(--youtube-delay) forwards;
         }
 
         #youtubeLink a {
@@ -350,8 +351,7 @@
         }
 
         body.playing #endScreen {
-            animation: fadeIn 2s ease calc(var(--crawl-delay) + var(--crawl-duration)) forwards;
-            pointer-events: auto;
+            animation: fadeInScreen 2s ease var(--end-screen-delay) forwards;
         }
 
         #endScreen a {
@@ -391,9 +391,9 @@
             margin-top: 20px;
         }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+        @keyframes fadeInScreen {
+            0% { opacity: 0; pointer-events: none; }
+            100% { opacity: 1; pointer-events: auto; }
         }
 
         /* Animations */
@@ -437,12 +437,7 @@
             100% { transform: translateY(-2200px); }
         }
 
-        @keyframes fadeInOut {
-            0% { opacity: 0; }
-            5% { opacity: 1; }
-            95% { opacity: 1; }
-            100% { opacity: 0; }
-        }
+
 
         /* Mobile Responsive */
         @media only screen and (max-device-width: 500px) {
