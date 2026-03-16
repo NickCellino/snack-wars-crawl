@@ -21,7 +21,7 @@
          * Only the text crawl is affected by this factor.
          */
         :root {
-            --time-factor: 0.3;
+            --time-factor: 1.5;
             
             /* Logo timings - always original speed */
             --logo-duration: 11s;
@@ -33,7 +33,7 @@
             
             /* Crawl timings - affected by time factor */
             --crawl-duration: calc(73s * var(--time-factor));
-            --crawl-delay: 13s;
+            --crawl-delay: 16.5s;
             
             /* Ending - affected by time factor */
             --ending-duration: calc(7s * var(--time-factor));
@@ -295,13 +295,6 @@
             animation: scrolldown var(--ending-duration) var(--ending-delay) forwards;
         }
 
-        #deathstar {
-            position: absolute;
-            right: 100px;
-            bottom: 1150px;
-            width: 655px;
-        }
-
         /* YouTube Link */
         #youtubeLink {
             position: fixed;
@@ -371,10 +364,9 @@
                 top: 100%;
                 opacity: 1;
             }
-            95% { opacity: 1; }
             100% {
-                top: 20%;
-                opacity: 0;
+                top: -200%;
+                opacity: 1;
             }
         }
 
@@ -411,11 +403,6 @@
                 font-size: 40px;
             }
 
-            #deathstar {
-                width: 300px;
-                right: 20px;
-            }
-
             #youtubeLink {
                 bottom: 10px;
                 right: 10px;
@@ -437,9 +424,7 @@
     <!-- Animation Container -->
     <div id="animationContainer">
         <article class="starwarsAnimation">
-            <div id="backgroundSpace">
-                <img id="deathstar" src="https://kassellabs.us-east-1.linodeobjects.com/static-assets/star-wars/deathstar.png" alt="Death Star"/>
-            </div>
+            <div id="backgroundSpace"></div>
 
             <div class="introBackground">
                 <div id="intro" class="intro">
