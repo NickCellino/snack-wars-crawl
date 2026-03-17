@@ -1,5 +1,44 @@
 /* Main Styles - Star Wars Opening Crawl */
 
+/* Record Button - positioned outside recording area */
+.record-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 200;
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'News Cycle', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.record-button:hover {
+    background-color: #ff6666;
+    transform: scale(1.05);
+}
+
+.record-button.recording {
+    background-color: #ff0000;
+    animation: pulse 1s infinite;
+}
+
+.record-button.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
 @import url('variables.css');
 @import url('animations.css');
 
