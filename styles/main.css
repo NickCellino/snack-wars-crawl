@@ -5,12 +5,12 @@
 
 @font-face {
     font-family: StarWars;
-    src: url('../Starjedi.ttf') format('truetype');
+    src: url('../static/Starjedi.ttf') format('truetype');
 }
 
 @font-face {
     font-family: StarWarsTitle;
-    src: url('../SWCrawlTitle3.ttf') format('truetype');
+    src: url('../static/SWCrawlTitle3.ttf') format('truetype');
 }
 
 * {
@@ -298,7 +298,8 @@ body.playing #playScreen {
 }
 
 #endScreen a:hover {
-    color: #ff0000;
+    color: white;
+    background: #ff0000;
     transform: scale(1.05);
 }
 
@@ -320,7 +321,7 @@ body.playing #playScreen {
 }
 
 /* Mobile Responsive */
-@media only screen and (max-device-width: 500px) {
+@media only screen and (max-device-width: 750px) {
     .intro {
         font-size: 6vw;
     }
@@ -348,5 +349,22 @@ body.playing #playScreen {
     #youtubeLink a {
         font-size: 14px;
         padding: 8px 12px;
+    }
+
+    #endScreen {
+        padding: 20px;
+    }
+
+    #endScreen a {
+        max-width: 90%;
+        padding: 40px 30px;
+    }
+
+    .endScreenText {
+        font-size: 28px;
+    }
+
+    .endScreenSubtext {
+        font-size: 20px;
     }
 }

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - End Screen Button</title>
+    <link href="https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: black;
+            color: #ffd54e;
+            font-family: 'News Cycle', sans-serif;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* End Screen */
+        #endScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 60;
+            opacity: 1;
+        }
+
+        #endScreen a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            color: #ff0000;
+            text-decoration: none;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 60px 80px;
+            border-radius: 20px;
+            border: 4px solid #ff0000;
+            transition: all 0.3s ease;
+        }
+
+        #endScreen a:hover {
+            color: white;
+            background: #ff0000;
+            transform: scale(1.05);
+        }
+
+        .endScreenText {
+            font-size: 48px;
+            font-weight: bold;
+            font-family: 'News Cycle', sans-serif;
+        }
+
+        .endScreenSubtext {
+            font-size: 36px;
+            font-family: 'News Cycle', sans-serif;
+        }
+
+        #endScreen svg {
+            width: 80px;
+            height: 80px;
+            margin-top: 20px;
+        }
+
+        /* Test variations - uncomment to try different styles */
+        
+        /* Option: Different colors */
+        /*
+        #endScreen a {
+            color: #ffd54e;
+            border-color: #ffd54e;
+        }
+        #endScreen a:hover {
+            color: #ffd54e;
+        }
+        */
+
+        /* Option: Bigger padding */
+        /*
+        #endScreen a {
+            padding: 80px 120px;
+        }
+        */
+
+        /* Option: Rounded corners */
+        /*
+        #endScreen a {
+            border-radius: 50px;
+        }
+        */
+
+        /* Mobile Responsive */
+        @media only screen and (max-device-width: 750px) {
+            #endScreen {
+                padding: 20px;
+            }
+
+            #endScreen a {
+                padding: 40px 30px;
+                max-width: 90%;
+            }
+
+            .endScreenText {
+                font-size: 28px;
+            }
+
+            .endScreenSubtext {
+                font-size: 20px;
+            }
+
+            #endScreen svg {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        /* Info label */
+        .test-label {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: #666;
+            font-size: 14px;
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-label">Test Component - End Screen</div>
+
+    <div id="endScreen">
+        <a href="https://www.youtube.com/watch?v=jm6W73ZbYTg" target="_blank" rel="noopener noreferrer">
+            <div class="endScreenText">Watch the full video</div>
+            <div class="endScreenSubtext">"The Snack Wars, Part 1"</div>
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+        </a>
+    </div>
+</body>
+</html>
