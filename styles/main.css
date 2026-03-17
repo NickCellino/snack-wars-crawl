@@ -76,7 +76,7 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
-    background: url('./static/bg-stars.png') repeat;
+    background: url('../static/bg-stars.png') repeat;
     background-color: black;
     color: #ffd54e;
     font-family: 'News Cycle', sans-serif;
@@ -284,7 +284,7 @@ body.playing #playScreen {
     left: 0;
     width: 100%;
     height: 4100px;
-    background: url('./static/bg-stars.png') repeat;
+    background: url('../static/bg-stars.png') repeat;
 }
 
 /* YouTube Link - Static, always visible in lower right */
