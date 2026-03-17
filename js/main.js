@@ -1,6 +1,6 @@
 /**
  * Snack Wars Opening Crawl - Main JavaScript
- * Handles play button interaction, audio playback, and keyboard controls
+ * Handles play button interaction, audio playback, crawl selection, and keyboard controls
  */
 
 (function() {
@@ -10,11 +10,185 @@
     const playButton = document.getElementById('playButton');
     const themeAudio = document.getElementById('themeAudio');
     const recordButton = document.getElementById('recordButton');
+    const crawlSelect = document.getElementById('crawlSelect');
+    const episodeEl = document.getElementById('episode');
+    const titleEl = document.getElementById('title');
+    const textEl = document.getElementById('text');
+    const youtubeLinkEl = document.getElementById('youtubeLink');
+    const endScreenEl = document.getElementById('endScreen');
 
     // Recording state
     let mediaRecorder = null;
     let recordedChunks = [];
     let isRecording = false;
+
+    // Available crawls
+    let availableCrawls = [];
+    let currentCrawl = null;
+
+    /**
+     * Discover available crawl files by trying to fetch them
+     */
+    async function discoverCrawls() {
+        const crawls = [];
+        let partNum = 1;
+        
+        while (true) {
+            const filename = `part_${partNum}.txt`;
+            try {
+                const response = await fetch(`opening_crawls/${filename}`, { method: 'HEAD' });
+                if (response.ok) {
+                    crawls.push({
+                        id: filename.replace('.txt', ''),
+                        label: `Part ${partNum}`,
+                        path: `opening_crawls/${filename}`
+                    });
+                    partNum++;
+                } else {
+                    break;
+                }
+            } catch (e) {
+                break;
+            }
+        }
+        
+        return crawls;
+    }
+
+    /**
+     * Load crawl content from file
+     * @param {string} crawlId - The crawl ID (e.g., 'part_1')
+     */
+    async function loadCrawl(crawlId) {
+        const crawl = availableCrawls.find(c => c.id === crawlId);
+        if (!crawl) return false;
+
+        try {
+            const response = await fetch(crawl.path);
+            if (!response.ok) return false;
+            
+            const text = await response.text();
+            const lines = text.trim().split('\n').filter(line => line.trim() !== '');
+            
+            if (lines.length < 4) {
+                console.error('Crawl file must have at least 4 lines: YouTube URL, episode, title, and content');
+                return false;
+            }
+
+            // Parse: line 1 = YouTube URL, line 2 = episode, line 3 = title, rest = body paragraphs
+            const youtubeUrl = lines[0];
+            episodeEl.textContent = lines[1];
+            titleEl.textContent = lines[2];
+            
+            // Build paragraphs from remaining lines
+            const paragraphs = lines.slice(3);
+            textEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+            
+            // Update YouTube links
+            updateYoutubeLinks(youtubeUrl, lines[1], lines[2]);
+            
+            currentCrawl = crawlId;
+            return true;
+        } catch (error) {
+            console.error('Failed to load crawl:', error);
+            return false;
+        }
+    }
+
+    /**
+     * Update YouTube link elements with the provided URL and metadata
+     * @param {string} url - YouTube video URL
+     * @param {string} episode - Episode text (e.g., "PART I")
+     * @param {string} title - Title text (e.g., "THE SNACK WARS")
+     */
+    function updateYoutubeLinks(url, episode, title) {
+        // Update the bottom right YouTube link
+        if (youtubeLinkEl) {
+            const link = youtubeLinkEl.querySelector('a');
+            if (link) {
+                link.href = url;
+                const span = link.querySelector('span');
+                if (span) {
+                    span.textContent = `Watch "${episode.replace('PART', 'Part')}, ${title}"`;
+                }
+            }
+        }
+
+        // Update the end screen YouTube link
+        if (endScreenEl) {
+            const link = endScreenEl.querySelector('a');
+            if (link) {
+                link.href = url;
+                const subtext = link.querySelector('.endScreenSubtext');
+                if (subtext) {
+                    subtext.textContent = `"${episode.replace('PART', 'Part')}, ${title}"`;
+                }
+            }
+        }
+    }
+
+    /**
+     * Populate the crawl selector dropdown
+     */
+    function populateSelector() {
+        crawlSelect.innerHTML = '';
+        availableCrawls.forEach(crawl => {
+            const option = document.createElement('option');
+            option.value = crawl.id;
+            option.textContent = crawl.label;
+            crawlSelect.appendChild(option);
+        });
+    }
+
+    /**
+     * Handle crawl selection change
+     */
+    function handleCrawlChange() {
+        const selectedCrawl = crawlSelect.value;
+        loadCrawl(selectedCrawl);
+        updateUrl(selectedCrawl);
+    }
+
+    /**
+     * Update URL without reloading page
+     * @param {string} crawlId
+     */
+    function updateUrl(crawlId) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('crawl', crawlId);
+        window.history.replaceState({}, '', url);
+    }
+
+    /**
+     * Get crawl from URL parameter
+     */
+    function getCrawlFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('crawl');
+    }
+
+    /**
+     * Initialize the crawl system
+     */
+    async function initCrawls() {
+        availableCrawls = await discoverCrawls();
+        
+        if (availableCrawls.length === 0) {
+            console.error('No crawl files found in opening_crawls/');
+            return;
+        }
+
+        populateSelector();
+
+        // Check URL parameter first
+        const urlCrawl = getCrawlFromUrl();
+        const initialCrawl = urlCrawl && availableCrawls.find(c => c.id === urlCrawl) 
+            ? urlCrawl 
+            : availableCrawls[0].id;
+
+        crawlSelect.value = initialCrawl;
+        await loadCrawl(initialCrawl);
+    }
 
     /**
      * Start the animation and audio playback
@@ -168,6 +342,13 @@
         recordButton.addEventListener('click', toggleRecording);
     }
 
+    if (crawlSelect) {
+        crawlSelect.addEventListener('change', handleCrawlChange);
+    }
+
     document.addEventListener('keydown', handleKeyboard);
+
+    // Initialize crawls on page load
+    initCrawls();
 
 })();
