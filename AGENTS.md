@@ -2,35 +2,52 @@
 
 ## Repository Structure
 
-This repository has a split structure:
+This repository contains a standalone, no-build Star Wars-style opening crawl for "The Snack Wars".
 
-### Reference Implementation (`src/`)
-The `src/` directory contains the original **Star Wars Intro Creator** by Kassel Labs, cloned from https://github.com/KasselLabs/StarWarsIntroCreator. This is a full React application with:
-- Webpack build system
-- npm/node dependencies
-- Complex configuration
-- Material-UI components
+### Overview
 
-This reference implementation is a fully-featured web app for creating custom Star Wars opening crawls.
+This is a **zero-dependency implementation** that requires no build step or package manager. Just open `index.html` in a browser and it works.
 
-### My Single-File Implementation
-The root `index.html` file (along with `Starjedi.ttf`, `SWCrawlTitle3.ttf`, and `logo.svg`) is **my own single-file implementation**. This was added in commit `328839d` ("Got the basic part working").
+### File Organization
 
-This implementation:
-- Is a standalone HTML file with embedded CSS and JavaScript
-- Requires no build step or dependencies
-- Creates a Star Wars-style opening crawl for "The Snack Wars"
-- Includes starfield animation, logo animation, and scrolling text
-- Has a "Click to Play" button to handle browser autoplay restrictions
+```
+.
+├── index.html              # Main HTML file
+├── AGENTS.md              # This file
+├── logo.svg               # Snack Wars logo
+├── Starjedi.ttf           # Star Wars font
+├── SWCrawlTitle3.ttf      # Crawl text font
+├── styles/
+│   ├── variables.css      # Animation timing variables (edit to change speed)
+│   ├── animations.css     # Keyframe animations
+│   └── main.css          # Layout and styling
+└── js/
+    └── main.js           # Play button and keyboard controls
+```
 
-## Working with This Repo
+### Key Features
 
-**When making changes:**
-- Work on the root `index.html` file (the single-file implementation)
-- The `src/` directory is the original reference and should generally not be modified
-- Test the single-file implementation by opening `index.html` directly in a browser
+- **Standalone HTML**: Open directly in any modern browser
+- **Modular CSS**: Animation timing, keyframes, and layout are separated
+- **Easy customization**: Edit `styles/variables.css` to change animation speed
+- **Keyboard controls**: Press Escape or Space to restart
+- **Audio included**: Star Wars theme music (loaded from CDN)
 
-## Testing
+### Working with This Repo
+
+**To modify animation timing:**
+Edit `styles/variables.css` - the `--time-factor` variable controls crawl speed
+
+**To modify styling:**
+Edit `styles/main.css` for layout and appearance
+
+**To modify animations:**
+Edit `styles/animations.css` for keyframe animations
+
+**To modify interactions:**
+Edit `js/main.js` for JavaScript behavior
+
+### Testing
 
 ```bash
 # Simple HTTP server for testing
@@ -38,10 +55,14 @@ python3 -m http.server 8000
 # Then open http://localhost:8000
 ```
 
-## Key Files
+Or simply open `index.html` directly in your browser.
 
-- `index.html` - Main single-file implementation (MY CODE)
-- `Starjedi.ttf` - Star Wars font
-- `SWCrawlTitle3.ttf` - Crawl text font
-- `logo.svg` - Snack Wars logo
-- `src/` - Original Kassel Labs React app (REFERENCE ONLY)
+### No Build Required
+
+This implementation intentionally avoids:
+- npm/node dependencies
+- Build tools or bundlers
+- Transpilation steps
+- External frameworks
+
+Just pure HTML, CSS, and JavaScript that works in any modern browser.

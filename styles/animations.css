@@ -1,0 +1,76 @@
+/* Animation Keyframes */
+
+@keyframes introTextAnimation {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes introBackgroundAnimation {
+    0% { opacity: 1; }
+    100% { opacity: 1; }
+}
+
+@keyframes logoAnimation {
+    0% {
+        transform: translate(-50%, -50%) scale(2.2);
+        opacity: 1;
+    }
+    95% { opacity: 1; }
+    100% {
+        transform: translate(-50%, -50%) scale(0.01);
+        opacity: 0;
+    }
+}
+
+@keyframes titlesAnimation {
+    0% {
+        top: 100%;
+        opacity: 1;
+    }
+    100% {
+        top: -200%;
+        opacity: 1;
+    }
+}
+
+@keyframes scrolldown {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-2200px); }
+}
+
+@keyframes fadeInScreen {
+    0% { opacity: 0; pointer-events: none; }
+    100% { opacity: 1; pointer-events: auto; }
+}
+
+/* Animation triggers - these apply when body has 'playing' class */
+
+body.playing .introBackground {
+    animation: introBackgroundAnimation 9s;
+}
+
+body.playing .intro {
+    animation: introTextAnimation var(--intro-duration) ease-out var(--intro-delay);
+}
+
+body.playing #logo {
+    animation: logoAnimation var(--logo-duration) cubic-bezier(.11, .6, .48, .88) var(--logo-delay);
+}
+
+body.playing #titles > div {
+    animation: titlesAnimation var(--crawl-duration) linear var(--crawl-delay) forwards;
+}
+
+body.playing #backgroundSpace {
+    animation: scrolldown var(--ending-duration) var(--ending-delay) forwards;
+}
+
+body.playing #youtubeLink {
+    opacity: 1;
+}
+
+body.playing #endScreen {
+    animation: fadeInScreen 2s ease var(--end-screen-delay) forwards;
+}

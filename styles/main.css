@@ -1,0 +1,352 @@
+/* Main Styles - Star Wars Opening Crawl */
+
+@import url('variables.css');
+@import url('animations.css');
+
+@font-face {
+    font-family: StarWars;
+    src: url('../Starjedi.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: StarWarsTitle;
+    src: url('../SWCrawlTitle3.ttf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: url('./static/bg-stars.png') repeat;
+    background-color: black;
+    color: #ffd54e;
+    font-family: 'News Cycle', sans-serif;
+    overflow: hidden;
+}
+
+/* Play Button Screen */
+#playScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+#playButton {
+    padding: 20px 60px 30px;
+    font-size: 50px;
+    background-color: transparent;
+    color: #ffd54e;
+    border: 4px solid #ffd54e;
+    border-radius: 15px;
+    cursor: pointer;
+    font-family: StarWars, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    line-height: 1.1em;
+    transition: all 0.3s ease;
+}
+
+#playButton:hover {
+    background-color: #ffd54e;
+    color: black;
+    box-shadow: 0 0 20px rgba(255, 213, 78, 0.5);
+}
+
+/* Animation Container */
+#animationContainer {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+body.playing #animationContainer {
+    display: block;
+}
+
+body.playing #playScreen {
+    display: none;
+}
+
+/* Star Wars Animation */
+.starwarsAnimation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    letter-spacing: .15em;
+    font-weight: 700;
+    font-size: 1em;
+    line-height: normal;
+}
+
+/* Intro Text */
+.introBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: 0;
+}
+
+.intro {
+    padding-right: 5%;
+    padding-left: 5%;
+    color: #4bd5ee;
+    font-weight: 400;
+    font-size: 4.5vw;
+    opacity: 0;
+    transform: scaleX(1.1);
+}
+
+/* Logo */
+#logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: StarWars, sans-serif;
+    opacity: 0;
+    width: 100vw;
+}
+
+.logoSub {
+    width: 100%;
+}
+
+#logoDefault {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    display: none;
+    margin: 0 auto;
+}
+
+.logoText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+    text-shadow:
+        -2px -2px 0 #ffd54e,
+        2px -2px 0 #ffd54e,
+        -2px 2px 0 #ffd54e,
+        2px 2px 0 #ffd54e,
+        -3px 0 0 #ffd54e,
+        3px 0 0 #ffd54e,
+        0 -3px 0 #ffd54e,
+        0 3px 0 #ffd54e;
+    letter-spacing: .18em;
+    font-size: 200px;
+    line-height: 1em;
+    font-family: StarWars, sans-serif;
+}
+
+.logoText div {
+    white-space: nowrap;
+}
+
+/* Titles/Crawl */
+#titles {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: 50%;
+    overflow: hidden;
+    margin: 0 0 0 -7.325em;
+    width: 14.65em;
+    height: 50em;
+    text-align: justify;
+    word-wrap: break-word;
+    font-size: 350%;
+    transform-origin: 50% 100%;
+    transform: perspective(300px) rotateX(25deg);
+}
+
+#titles > div {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+}
+
+#titles > div > p {
+    margin: 1.35em 0 1.85em 0;
+    line-height: 1.35em;
+    backface-visibility: hidden;
+}
+
+.tcenter {
+    margin: 1.35em 0 -1em 0;
+    text-align: center;
+}
+
+#title {
+    transform: scaleY(2);
+    margin-top: 3.5em;
+    margin-bottom: 1.6em;
+    text-transform: uppercase;
+    font-family: 'News Cycle', sans-serif;
+    font-size: 210%;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+
+#episode {
+    margin-bottom: -2em;
+    font-family: StarWarsTitle, sans-serif;
+    text-transform: lowercase;
+    font-size: 110%;
+}
+
+#text {
+    line-height: 1.4em;
+}
+
+#text p {
+    margin: 1em 0;
+}
+
+/* Background Space */
+#backgroundSpace {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4100px;
+    background: url('./static/bg-stars.png') repeat;
+}
+
+/* YouTube Link - Static, always visible in lower right */
+#youtubeLink {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 50;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#youtubeLink a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ff0000;
+    text-decoration: none;
+    font-size: 16px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 2px solid #ff0000;
+    transition: all 0.3s ease;
+}
+
+#youtubeLink a:hover {
+    background: #ff0000;
+    color: white;
+}
+
+#youtubeLink svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* End Screen */
+#endScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 60;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#endScreen a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    color: #ff0000;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 60px 80px;
+    border-radius: 20px;
+    border: 4px solid #ff0000;
+    transition: all 0.3s ease;
+}
+
+#endScreen a:hover {
+    color: #ff0000;
+    transform: scale(1.05);
+}
+
+.endScreenText {
+    font-size: 48px;
+    font-weight: bold;
+    font-family: 'News Cycle', sans-serif;
+}
+
+.endScreenSubtext {
+    font-size: 36px;
+    font-family: 'News Cycle', sans-serif;
+}
+
+#endScreen svg {
+    width: 80px;
+    height: 80px;
+    margin-top: 20px;
+}
+
+/* Mobile Responsive */
+@media only screen and (max-device-width: 500px) {
+    .intro {
+        font-size: 6vw;
+    }
+
+    .logoText {
+        font-size: 100px;
+    }
+
+    #titles {
+        bottom: 0;
+        left: 50%;
+        font-size: 180%;
+    }
+
+    #playButton {
+        padding: 12px 30px 20px;
+        font-size: 40px;
+    }
+
+    #youtubeLink {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    #youtubeLink a {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}

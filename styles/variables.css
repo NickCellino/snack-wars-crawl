@@ -1,0 +1,37 @@
+:root {
+    /* 
+     * ANIMATION SPEED CONTROL
+     * 
+     * --time-factor: Controls the crawling text scroll speed
+     *   - 1.0 = normal speed (default)
+     *   - 0.7 = 30% faster (current setting)
+     *   - 0.5 = 2x faster
+     *   - 2.0 = 2x slower
+     * 
+     * Logo animation always stays at original speed (11s)
+     * Only the text crawl is affected by this factor.
+     */
+    --time-factor: 1.5;
+
+    /* use this for testing */
+    /* --time-factor: 0.2; */
+    
+    /* Logo timings - always original speed */
+    --logo-duration: 11s;
+    --logo-delay: 9s;
+    
+    /* Intro text - original speed */
+    --intro-duration: 6s;
+    --intro-delay: 1s;
+    
+    /* Crawl timings - affected by time factor */
+    --crawl-duration: calc(73s * var(--time-factor));
+    --crawl-delay: 16.5s;
+    
+    /* Ending - affected by time factor */
+    --ending-duration: calc(7s * var(--time-factor));
+    --ending-delay: calc(86s * var(--time-factor));
+    
+    /* End screen fade-in - starts 5s before crawl ends */
+    --end-screen-delay: calc(var(--crawl-delay) + var(--crawl-duration) - (28.5s * var(--time-factor)));
+}
