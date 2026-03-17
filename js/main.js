@@ -41,8 +41,12 @@
      * @param {KeyboardEvent} e
      */
     function handleKeyboard(e) {
-        if (e.key === 'Escape' || e.key === ' ') {
+        if (e.key === 'Escape') {
             stopPlayback();
+        } else if (e.key === ' ') {
+            // Toggle UI visibility for clean recording
+            e.preventDefault();
+            document.body.classList.toggle('hide-ui');
         }
     }
 

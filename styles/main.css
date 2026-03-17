@@ -39,6 +39,14 @@
     50% { opacity: 0.7; }
 }
 
+/* Hide UI elements when recording */
+body.hide-ui #recordButton,
+body.hide-ui #youtubeLink,
+body.hide-ui #endScreen {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
 @import url('variables.css');
 @import url('animations.css');
 
