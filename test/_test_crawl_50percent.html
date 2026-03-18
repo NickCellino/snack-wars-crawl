@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Crawl Text (50%)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: StarWars;
+            src: url('../static/Starjedi.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: StarWarsTitle;
+            src: url('../static/SWCrawlTitle3.ttf') format('truetype');
+        }
+
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100vh;
+            background: url('../static/bg-stars.png') repeat;
+            background-color: black;
+            color: #ffd54e;
+            font-family: 'News Cycle', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Star Wars Animation Container */
+        .starwarsAnimation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            letter-spacing: .15em;
+            font-weight: 700;
+            font-size: 1em;
+            line-height: normal;
+        }
+
+        /* Titles/Crawl - Static at 50% */
+        #titles {
+            --titles-width: 20em;
+            position: absolute;
+            top: auto;
+            bottom: 0;
+            left: 50%;
+            overflow: hidden;
+            margin: 0 0 0 calc(var(--titles-width) / -2);
+            width: var(--titles-width);
+            height: 50em;
+            text-align: justify;
+            word-wrap: break-word;
+            font-size: 350%;
+            transform-origin: 50% 100%;
+            transform: perspective(300px) rotateX(20deg);
+        }
+
+        /* Position at 50% through the animation (halfway between top: 100% and top: -200%) */
+        #titles > div {
+            position: absolute;
+            top: -25%;
+            width: 100%;
+        }
+
+        #titles > div > p {
+            margin: 1.35em 0 1.85em 0;
+            line-height: 1.35em;
+            backface-visibility: hidden;
+        }
+
+        .tcenter {
+            margin: 1.35em 0 -1em 0;
+            text-align: center;
+        }
+
+        #title {
+            transform: scaleY(2);
+            margin-top: 3.5em;
+            margin-bottom: 1.6em;
+            text-transform: uppercase;
+            font-family: 'News Cycle', sans-serif;
+            font-size: 210%;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+        }
+
+        #episode {
+            margin-bottom: -2em;
+            font-family: StarWarsTitle, sans-serif;
+            text-transform: lowercase;
+            font-size: 110%;
+        }
+
+        #text {
+            line-height: 1.4em;
+        }
+
+        #text p {
+            margin: 1em 0;
+        }
+
+        /* Test info label */
+        .test-label {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: #666;
+            font-size: 14px;
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        /* Position indicator */
+        .position-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            color: #4bd5ee;
+            font-size: 14px;
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border: 1px solid #4bd5ee;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        /* Test variations - uncomment to try different styles */
+        
+        /* Option: Different text color */
+        /*
+        body {
+            color: #ffffff;
+        }
+        */
+
+        /* Option: Different font size */
+        /*
+        #titles {
+            font-size: 400%;
+        }
+        */
+
+        /* Option: Different perspective/angle */
+        /*
+        #titles {
+            transform: perspective(400px) rotateX(20deg);
+        }
+        */
+
+        /* Option: Adjust position (25%, 75%, etc.) */
+        /*
+        #titles > div {
+            top: 25%;
+        }
+        */
+
+        /* Mobile Responsive */
+        @media only screen and (max-device-width: 750px) {
+            #titles {
+                bottom: 0;
+                left: 50%;
+                font-size: 180%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-label">Test Component - Crawl Text (50%)</div>
+    <div class="position-indicator">Position: 50%<br>top: -50%</div>
+
+    <article class="starwarsAnimation">
+        <div id="titles">
+            <div>
+                <p id="episode" class="tcenter">PART I</p>
+                <p id="title" class="tcenter">THE SNACK WARS</p>
+                <div id="text">
+                    <p>For generations, the Goldfish Kingdom and the Pretzel Kingdom maintained an uneasy peace, each ruling their own domains within the vast Snack Kingdoms.</p>
+                    <p>The Goldfish King, lord of the salty realms, commands loyalty from his knights, the fearsome Reese's Pumpkins. Across the border, the Pretzel King rules the sweet territories, his power bolstered by legions of Cookie warriors.</p>
+                    <p>Though tensions have simmered for years, war was never inevitable—until now.</p>
+                    <p>The Goldfish King has issued a formal declaration of war against the Pretzel King. Both monarchs now race to gather their armies for the inevitable conflict that will decide the fate of the Snack Kingdoms.</p>
+                    <p>The war begins....</p>
+                </div>
+            </div>
+        </div>
+    </article>
+</body>
+</html>

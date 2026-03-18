@@ -267,19 +267,20 @@ body.playing #playScreen {
 
 /* Titles/Crawl */
 #titles {
+    --titles-width: 20em;
     position: absolute;
     top: auto;
     bottom: 0;
     left: 50%;
     overflow: hidden;
-    margin: 0 0 0 -7.325em;
-    width: 14.65em;
+    margin: 0 0 0 calc(var(--titles-width) / -2);
+    width: var(--titles-width);
     height: 50em;
     text-align: justify;
     word-wrap: break-word;
     font-size: 350%;
     transform-origin: 50% 100%;
-    transform: perspective(300px) rotateX(25deg);
+    transform: perspective(300px) rotateX(20deg);
 }
 
 #titles > div {
@@ -425,6 +426,8 @@ body.playing #playScreen {
 @media only screen and (max-device-width: 750px) {
     .intro {
         font-size: 6vw;
+        padding-right: 10%;
+        padding-left: 10%;
     }
 
     .logoText {
@@ -432,14 +435,18 @@ body.playing #playScreen {
     }
 
     #titles {
+        --titles-width: 16em;
         bottom: 0;
         left: 50%;
         font-size: 180%;
+        margin: 0 0 0 calc(var(--titles-width) / -2);
+        width: var(--titles-width);
     }
 
     #playButton {
         padding: 12px 30px 20px;
         font-size: 40px;
+        margin: 0 10%;
     }
 
     #youtubeLink {
